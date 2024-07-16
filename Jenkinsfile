@@ -1,16 +1,20 @@
-#!groovy
 pipeline {
-    agent none
-   stages {     
-    stage('Maven Install') {
-      agent {         
-       docker {          
-         image 'maven:3.5.0'         
-     }       
-  }       
-  steps {
-       sh 'mvn clean install'
+    agent any
+     stages {
+        stage('MavenPackage') {
+            steps {
+                sh './mvnw package'
+             }
+        }
+         stage('DockerBuild') {
+            steps {
+                    sh 'docker build -t enepau/worker:latest'
+                   }
+           }
+         stage('Imagepush') {
+            steps {
+                    sh 'docker push enepau/worker:latest'
+                   }
+           }
        }
-     }
    }
- }
