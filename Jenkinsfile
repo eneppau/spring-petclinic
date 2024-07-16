@@ -8,12 +8,12 @@ pipeline {
         }
          stage('DockerBuild') {
             steps {
-                    sh 'docker build -t enepau/spring-petclinic:latest .'
+                    sh 'docker build -t enepau/worker:latest .'
                    }
            }
          stage('Imagepush') {
             steps {
-                    sh 'docker push enepau/spring-petclinic:latest'
+                    sh 'docker push enepau/worker:latest'
                    }
            }
        }
